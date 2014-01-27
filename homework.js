@@ -17,12 +17,9 @@ function _onMouseClick(e) {
 
 
 function openPopupFromLink(link) {
-    href = link.getAttribute('href');
-    console.log(href);
+    onOk = link.getAttribute('href');
     title = link.dataset.title;
-    console.log(title);
-    message = (link.dataset.message).replace(/%s/, href);
-    onOk = href;
+    message = (link.dataset.message).replace(/%s/, onOk);
 
     return createPopup(title, message, onOk)
 }
@@ -34,11 +31,11 @@ function createPopup(title, message, onOk) {
     <i class="close" onclick="closePopup()"></i>\
     <h3>' + title + '</h3> \
     <div class="content">' + message + '</div> \
-    <button id="no" value="no" onclick="closePopup()"> Нет </button> \
-    <button id="ok" value="ok" onclick="window.location = onOk"> Да </button> \
+    <input type="button" value="Нет" onclick="closePopup()"> \
+    <input type="button" value="Да" onclick="window.location = onOk"> \
   </div></div>';
 
-    return document.body.appendChild(popupWrap);
+    document.body.appendChild(popupWrap);
 }
 
 

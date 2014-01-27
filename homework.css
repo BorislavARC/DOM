@@ -37,7 +37,7 @@ h1 {
     left: 0;
     top: 0;
 }
-.popup button {
+.popup input {
     margin: 15px 0 0 10px;
     float: right;
     padding: 2px 9px;
@@ -50,6 +50,14 @@ h1 {
     background: -moz-linear-gradient(#fefefe, #eeeeee);
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#fefefe), to(#eeeeee));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fefefe', endColorstr='#eeeeee');
+}
+.popup input:hover {
+    border: 1px solid #686868;
+
+}
+.close:hover {
+    border-radius: 10px;
+    border: 1px solid #686868;
 }
 .close {
     width: 14px;

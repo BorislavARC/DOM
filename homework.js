@@ -1,11 +1,10 @@
 
 var links = document.getElementsByClassName('popup-link'),
     popupWrap = document.createElement('div'),
-    link, href, onOk, title, message, i;
+    link, onOk, title, message, href;
 
-for(i = 0; i < links.length; i++) {
-    links[i].onclick = _onMouseClick;
-}
+links[0].addEventListener("click", _onMouseClick);
+links[1].addEventListener("click", _onMouseClick);
 
 
 function _onMouseClick(e) {
@@ -17,30 +16,26 @@ function _onMouseClick(e) {
 
 
 function openPopupFromLink(link) {
-    onOk = link.getAttribute('href');
+    href = link.getAttribute('href');
     title = link.dataset.title;
-    message = (link.dataset.message).replace(/%s/, onOk);
+    message = link.dataset.message.replace(/%s/, href);
+    onOk = function() {
+        window.location = href;
+    };
 
     return createPopup(title, message, onOk)
 }
 
 
 function createPopup(title, message, onOk) {
-    popupWrap.innerHTML = '<div class="popup-wrap"> \
-    <div class="popup"> \
-    <i class="close" onclick="closePopup()"></i>\
+    popupWrap.className = 'popup-wrap';
+    popupWrap.innerHTML = '<div class="popup"> \
+    <i class="close" onclick="document.body.removeChild(popupWrap)"></i>\
     <h3>' + title + '</h3> \
     <div class="content">' + message + '</div> \
-    <input type="button" value="Нет" onclick="closePopup()"> \
-    <input type="button" value="Да" onclick="window.location = onOk"> \
-  </div></div>';
+    <input type="button" value="Нет" onclick="document.body.removeChild(popupWrap)"> \
+    <input type="button" value="Да" onclick="onOk()"> \
+    </div>';
 
     document.body.appendChild(popupWrap);
 }
-
-
-function closePopup() {
-    document.body.removeChild(popupWrap)
-}
-
-

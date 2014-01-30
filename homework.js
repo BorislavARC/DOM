@@ -1,5 +1,4 @@
 
-
 document.body.addEventListener('click', _onMouseClick);
 
 
@@ -30,23 +29,27 @@ function openPopupFromLink(link) {
 
 
 function createPopup(title, message, onOk) {
+    var elem = document.getElementsByClassName('popup-wrap')[0];
+    if(elem !== undefined) {
+        elem.style.display = 'block';
+    } else {
     var popupWrap = document.createElement('div');
     popupWrap.className = 'popup-wrap';
     popupWrap.innerHTML = '<div class="popup"> \
     <i class="close"></i>\
     <h3>' + title + '</h3> \
     <div class="popup-content">' + message + '</div> \
-    <input id="not" type="button" value="Нет"> \
-    <input id="yes" type="button" value="Да"> \
+    <input class="not" type="button" value="Нет"> \
+    <input class="yes" type="button" value="Да"> \
     </div>';
 
     document.body.appendChild(popupWrap);
+    }
 
     function del() {
-        document.body.removeChild(popupWrap)
+       document.getElementsByClassName('popup-wrap')[0].style.display = 'none';
     }
     document.getElementsByClassName('close')[0].addEventListener('click', del);
-    document.getElementById('not').addEventListener('click', del);
-    document.getElementById('yes').addEventListener('click', onOk);
-
+    document.getElementsByClassName('not')[0].addEventListener('click', del);
+    document.getElementsByClassName('yes')[0].addEventListener('click', onOk);
 }
